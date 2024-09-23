@@ -1,0 +1,16 @@
+{
+  "build": {
+    "appId": "com.example.yourapp",
+    "productName": "Your App Name",
+    "files": [
+      "main.js",
+      "package.json",
+      "node_modules/**/*",
+      "build/icon.png"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "icon": "build/icon.png"
+  }
+}
