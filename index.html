@@ -8,16 +8,32 @@
     <meta name="theme-color" content="#000000">
     <script>
         if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.register('/sw.js').then(function(registration) {
-            console.log('Service Worker registered with scope:', registration.scope);
-          }).catch(function(error) {
-            console.log('Service Worker registration failed:', error);
-          });
+            navigator.serviceWorker.register('/sw.js').then(function(registration) {
+                console.log('Service Worker registered with scope:', registration.scope);
+            }).catch(function(error) {
+                console.log('Service Worker registration failed:', error);
+            });
         }
-      </script>
+    </script>
 </head>
 <body>
-    <h1>Hello, PWA!</h1>
-    <p>This is a simple progressive web app.</p>
+    <h1>Расределение бюджета</h1>
+    <input id="phrase-input" type="text" placeholder="Введите слово или фразу" />
+    <button id="save-button">Сохранить</button>
+
+    <script>
+        const { ipcRenderer } = require('electron');
+
+        document.getElementById('save-button').addEventListener('click', () => {
+            const phrase = document.getElementById('phrase-input').value;
+            if (phrase) {
+                ipcRenderer.send('save-phrase', phrase);
+                document.getElementById('phrase-input').value = ''; // Очистка инпута после сохранения
+                alert('Фраза сохранена!');
+            } else {
+                alert('Пожалуйста, введите слово или фразу!');
+            }
+        });
+    </script>
 </body>
 </html>
